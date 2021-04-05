@@ -19,4 +19,8 @@ Route::get('/', [PagesController::class, 'showHomePage']);
 
 Route::get('/post/{id}', [PostsController::class, 'getPostById']);
 
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
+require __DIR__.'/auth.php';
