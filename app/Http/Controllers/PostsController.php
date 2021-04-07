@@ -11,4 +11,55 @@ class PostsController extends Controller
         $post = Post::findOrFail($id);
         return view('post', ['post' => $post]);
     }
+
+    public function showNewPostForm(Request $request){
+        return view('newPost');
+    }
+
+    public function createNewPost(Request $request){
+
+        $request->validate([
+            'title' => 'required|string|max:45',
+            'body' => 'required|string'
+        ]);
+
+
+
+        $title = $request->title;
+        $body = $request->body;
+
+        $post = new Post();
+        $post->title = $title;
+        $post->body = $body;
+
+        $post->save();
+
+        return redirect('/user');
+    }
+
+    public function showEditPostForm(Request $request, $id){
+        $post = Post::findOrFail($id);
+        return view('editPost', ['post' => $post]);
+    }
+
+    public function editPost(Request $request, $id){
+        $post = Post::findOrFail($id);
+
+        $title = $request->title;
+        $body = $request->body;
+
+        $post->title = $title;
+        $post->body = $body;
+        $post->save();
+
+        return view('editPost', ['post' => $post, 'message' => 'Post Editovan!']);
+    }
+
+    public function deletePost(Request $request, $id){
+        $post = Post::findOrFail($id);
+
+        $post->delete();
+        return redirect()->back()->with('message', 'Post Deleted!');
+    }
+    
 }

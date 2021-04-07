@@ -10,9 +10,9 @@
     <body class="antialiased">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container">
-                <a class="navbar-brand" href="/">HOME</a>
+                <a class="navbar-brand " href="/">HOME</a>
                 @if(Auth::user())
-                    <p>{{Auth::user()->name}} {{Auth::user()->lastName}}</p>
+                    <a href="/user" class="btn btn-outline-primary">{{Auth::user()->name}} {{Auth::user()->lastName}}</a>
                     <form method="POST" action="/logout">
                         @csrf
                         <input class="btn btn-outline-danger" type="submit" value="Logout">

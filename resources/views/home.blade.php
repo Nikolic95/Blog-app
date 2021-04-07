@@ -1,4 +1,3 @@
-
 @extends('layouts.nav')
 
 @section('content')
@@ -11,7 +10,7 @@
         </div>
         <div class="row">
             @foreach($posts as $post)
-                <div class="col-sm">
+                <div class="col-sm-4">
                     <div class="card mb-3">
                         <a href="/post/{{$post->id}}"><img src="https://picsum.photos/400/200?random={{$post->id}}" class="card-img-top" alt="..."></a>
                         <div class="card-body">
@@ -23,5 +22,6 @@
                     </div>
                 </div>
             @endforeach
-        </div>
+            {{ $posts->links() }}
+        </div>  
 @endsection
